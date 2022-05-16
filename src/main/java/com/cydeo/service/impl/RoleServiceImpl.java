@@ -2,20 +2,25 @@ package com.cydeo.service.impl;
 
 import com.cydeo.dto.RoleDTO;
 import com.cydeo.entity.Role;
+import com.cydeo.mapper.RoleMapper;
 import com.cydeo.repository.RoleRepository;
 import com.cydeo.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleMapper roleMapper;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, RoleMapper roleMapper) {
         this.roleRepository = roleRepository;
+        this.roleMapper = roleMapper;
     }
+
 
     @Override
     public List<RoleDTO> listAllRoles() {
@@ -23,12 +28,13 @@ public class RoleServiceImpl implements RoleService {
         //so.. i need to  go to db and bring all the roles from there
 
         //bring all the roles
-        List<Role> roleList=roleRepository.findAll();
+        // List<Role> roleList=roleRepository.findAll();
 
-        //convert entity to dto- Mapper
-
-
-        return null;
+        //convert entity to dto- Mapper - get roles from db and convert each role to roledto
+        //roleList.stream().map(obj-> roleMapper.convertToDto(obj));
+        // List<RoleDTO> list2=roleList.stream().map(roleMapper::convertToDto).collect(Collectors.toList());
+        //return list2;
+        return  roleRepository.findAll().stream().map(roleMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
