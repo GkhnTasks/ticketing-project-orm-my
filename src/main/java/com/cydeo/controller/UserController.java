@@ -3,25 +3,21 @@ package com.cydeo.controller;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.service.RoleService;
 import com.cydeo.service.UserService;
-import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/user")
-
 public class UserController {
 
-   private final RoleService roleService;
-   private final UserService userService;
+    private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(RoleService roleService, UserService userService) {
-        this.roleService = roleService;
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/create")
@@ -64,7 +60,7 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateUser( @ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model) {
+    public String updateUser(@ModelAttribute("user") UserDTO user, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
 
@@ -82,7 +78,8 @@ public class UserController {
 
     @GetMapping("/delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
-        userService.deleteByUserName(username);
+//        userService.deleteByUserName(username);
+        userService.delete(username);
         return "redirect:/user/create";
     }
 
