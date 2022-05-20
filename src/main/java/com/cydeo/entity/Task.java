@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Where(clause = "is_deleted=false")
-public class Task extends BaseEntity{
+public class Task extends BaseEntity {
 
     private String taskSubject;
     private String taskDetail;
@@ -24,10 +24,10 @@ public class Task extends BaseEntity{
     private Status taskStatus;
 
     @Column(columnDefinition = "DATE")
-    private LocalDate assignDate;
+    private LocalDate assignedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User assignEmployee;
+    private User assignedEmployee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
@@ -35,3 +35,19 @@ public class Task extends BaseEntity{
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,9 @@
 package com.cydeo.dto;
 
 import com.cydeo.enums.Gender;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.*;
 
@@ -13,6 +15,10 @@ public class UserDTO {
 
     private Long id;
 
+    @NotBlank
+    @Size(max = 15, min = 2)
+    private String firstName;
+
     public Long getId() {
         return id;
     }
@@ -20,10 +26,6 @@ public class UserDTO {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @NotBlank
-    @Size(max = 15, min = 2)
-    private String firstName;
 
     @NotBlank
     @Size(max = 15, min = 2)
