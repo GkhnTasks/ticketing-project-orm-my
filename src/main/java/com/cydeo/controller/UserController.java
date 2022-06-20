@@ -50,5 +50,6 @@ public class UserController {
         userService.deleteByUserName(userName);
        // return ResponseEntity.ok(new ResponseWrapper("user is successfully deleted",HttpStatus.OK));
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ResponseWrapper("user is successfully deleted",HttpStatus.CREATED));
+       //204 NO_CONTENT
     }
 }
