@@ -21,14 +21,14 @@ public class UserController {
     }
 
     @GetMapping
-    @RolesAllowed("Admin")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<ResponseWrapper> getUsers(){
       List<UserDTO> userDTOList=userService.listAllUsers();
       return ResponseEntity.ok(new ResponseWrapper("Users are successfully retrived",userDTOList, HttpStatus.OK));
     }
 
     @GetMapping("/{userName}")
-    @RolesAllowed("Admin")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<ResponseWrapper> getUserByUserName(@PathVariable("userName") String userName){
         UserDTO userDTO=userService.findByUserName(userName);
         return ResponseEntity.ok(new ResponseWrapper("User successfully retrieved",userDTO,HttpStatus.OK));
@@ -36,14 +36,14 @@ public class UserController {
     }
 
     @PostMapping
-    @RolesAllowed("Admin")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<ResponseWrapper> createUser(@RequestBody UserDTO user){
         userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("User is successfully created",HttpStatus.CREATED));
     }
 
     @PutMapping()
-    @RolesAllowed("Admin")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<ResponseWrapper> updateUser(@RequestBody UserDTO user){
 
         userService.update(user);
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userName}")
-    @RolesAllowed("Admin")
+    @RolesAllowed("ADMIN")
     public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("userName") String userName){
         userService.deleteByUserName(userName);
        // return ResponseEntity.ok(new ResponseWrapper("user is successfully deleted",HttpStatus.OK));
